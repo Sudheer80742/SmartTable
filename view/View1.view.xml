@@ -1,0 +1,163 @@
+<mvc:View 
+    xmlns:smartfield="sap.ui.comp.smartfield" 
+    xmlns:smarttable="sap.ui.comp.smarttable" 
+    controllerName="task.107.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns:table="sap.ui.table"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+    xmlns="sap.m">
+
+    <Page id="page" title="{i18n>title}">
+           <!-- <Table  items="{/SitePersonnel}" editable="{data>/edit}">
+    <columns>
+    <Column >
+    <Text text="Entity"/>
+    </Column>
+    <Column >
+    <Text text="Name"/>
+    </Column>
+    <Column >
+    <Text text="Code"/>
+    </Column>
+    </columns>
+    <ColumnListItem >
+    <cells >
+    <Text text="{Entity}"/>
+    <smartfield:SmartField value="{=${Entity}==='3' ? ${Name} : ${SCCname}}" editable="{data>/edit}"/>
+    <smartfield:SmartField value="{=${Entity}==='3' ? ${Code} : ${SCCcode}}" editable="{data>/edit}"/>
+    </cells>
+    </ColumnListItem>
+    </Table> -->
+        <Text text="By using Smarttable"/>
+        <smarttable:SmartTable 
+            entitySet="SitePersonnel" 
+            enableAutoBinding="true" 
+            initiallyVisibleFields="Entity,Name,Code,Status,IsDeleted" 
+            requestAtLeastFields="Entity,Name,Code,SCCname,SCCcode" 
+            editable="{data>/edit}"
+            >
+
+            <smarttable:customToolbar>
+            <Toolbar>
+            <ToolbarSpacer/>
+            <Button icon="sap-icon://edit" press="onEdit"/>
+            </Toolbar>
+            </smarttable:customToolbar>
+
+            <Table>
+ <ColumnListItem >
+    <cells>
+   <smartfield:SmartField value="{Entity}" editable="{data>/edit}"/>
+    <HBox>
+    <smartfield:SmartField value="{Name}" visible="{=${Entity}==='3'}" editable="{data>/edit}"/>
+    <smartfield:SmartField value="{SCCname}" visible="{=${Entity}!=='3'}" editable="{data>/edit}"/>    
+    </HBox>
+    <HBox>
+    <smartfield:SmartField value="{Code}" visible="{=${Entity}==='3'}" editable="{data>/edit}"/>
+    <smartfield:SmartField value="{SCCcode}" visible="{=${Entity}!=='3'}" editable="{data>/edit}"/>
+    </HBox>
+    <smartfield:SmartField value="{Status}" editable="{data>/edit}"/>
+    <HBox>
+  
+     <core:Icon
+                                src="sap-icon://BusinessSuiteInAppSymbols/icon-outbound-delivery-active"
+                                color="{=${IsDeleted} ? '#ff0000' : '#00ff00'}"
+                                tooltip="{=${IsDeleted} ? 'Not Done' : 'Done'}"
+                            />
+    </HBox>
+    </cells> 
+    </ColumnListItem>
+    </Table>
+   </smarttable:SmartTable>
+         <smarttable:SmartTable 
+            entitySet="SitePersonnel" 
+            enableAutoBinding="true" 
+            initiallyVisibleFields="Entity,Name,Code" 
+            requestAtLeastFields="Entity,Name,Code,SCCname,SCCcode" 
+            app:useSmartField="true"
+            editable="{data>/edit}"
+            enableAutoColumnWidth="true"
+            >
+            <smarttable:customToolbar>
+            <Toolbar>
+            <ToolbarSpacer/>
+            <Button icon="sap-icon://edit" press="onEdit"/>
+            </Toolbar>
+            </smarttable:customToolbar>
+            
+            <table:Table>
+                <table:columns>
+                    
+                    <table:Column>
+                        <table:customData>
+                            <core:CustomData
+                                key="p13nData"
+                                value='{"autoColumnWidth": {"visibleProperty": "Name", "truncateLabel": false}, "columnKey": "Name", "columnIndex": 1, "width": "auto"}'/>
+                        </table:customData>
+                           <Label text="{/#SitePersonnelType/Name/@sap:label}" />
+                        <table:template>
+                            <HBox>
+                                <smartfield:SmartField value="{Name}" visible="{=${Entity} === '3'}" editable="{data>/edit}"/>
+                                <smartfield:SmartField value="{SCCname}" visible="{=${Entity} !== '3'}" editable="{data>/edit}"/> 
+                            </HBox>
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column>
+                        <table:customData>
+                            <core:CustomData
+                                key="p13nData"
+                                value='{"autoColumnWidth": {"visibleProperty": "Code", "truncateLabel": false}, "columnKey": "Code", "columnIndex": 2, "width": "auto"}'/>
+                        </table:customData>
+                           <Label text="{/#SitePersonnelType/Code/@sap:label}" />
+                        <table:template>
+                            <HBox>
+                                <smartfield:SmartField value="{Code}" visible="{=${Entity} === '3'}" editable="{data>/edit}"/>
+                                <smartfield:SmartField value="{SCCcode}" visible="{=${Entity} !== '3'}" editable="{data>/edit}"/> 
+                            </HBox>
+                        </table:template>
+                    </table:Column>
+                      <table:Column width="150px">
+                        <table:customData>
+                            <core:CustomData
+                                key="p13nData"
+                                value='\{"autoColumnWidth": \{ "visibleProperty": "Status", "truncateLabel": false }, "columnKey": "Status", "columnIndex": 10}'
+                            />
+                        </table:customData>
+                        <Label text="{/#SitePersonnelType/Status/@sap:label}" />
+                        <table:template>
+                            <smartfield:SmartField
+                                value="{Status}"
+                                editable="{data>/edit}"
+                                innerControlsCreated="oInnerControlCreated"
+                            />
+                        </table:template>
+                        </table:Column>
+                         <table:Column width="150px">
+                        <table:customData>
+                            <core:CustomData
+                                key="p13nData"
+                                value='\{"columnKey": "IsDeleted", "leadingProperty": "IsDeleted", "columnIndex": 11}'
+                            />
+                        </table:customData>
+                        <Label text="Active Status" />
+                        <table:template>
+                            <core:Icon
+                                src="sap-icon://BusinessSuiteInAppSymbols/icon-outbound-delivery-active"
+                                color="{=${IsDeleted} ? '#ff0000' : '#00ff00'}"
+                                tooltip="{=${IsDeleted} ? 'Not Done' : 'Done'}"
+                            />
+                        </table:template>
+                    </table:Column>
+                  
+
+                </table:columns>
+            </table:Table>
+
+        </smarttable:SmartTable>
+        <Button text="BarGraphs" press="onButtonPress1"/>
+        <Button text="Circles" press="onButtonPress2"/>
+         <Button text="DateTime" press="onButtonPress3"/>
+    </Page>
+</mvc:View>

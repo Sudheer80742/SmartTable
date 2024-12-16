@@ -1,0 +1,158 @@
+{
+    "_version": "1.65.0",
+    "sap.app": {
+        "id": "task.107",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:basic",
+            "version": "1.15.7",
+            "toolsId": "4032f447-1e6b-4779-99aa-79367c4f8e54"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/sap/opu/odata/rbxcrm/SM_SB_SITEPERSONEL/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [
+                        "RBXCRM_SM_SB_SITEPERSONEL_VAN"
+                    ],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "RBXCRM_SM_SB_SITEPERSONEL_VAN": {
+                "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='%2FRBXCRM%2FSM_SB_SITEPERSONEL_VAN',Version='0001')/$value/",
+                "type": "ODataAnnotation",
+                "settings": {
+                    "localUri": "localService//RBXCRM/SM_SB_SITEPERSONEL_VAN.xml"
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": false,
+        "dependencies": {
+            "minUI5Version": "1.127.5",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "task.107.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "defaultBindingMode":"TwoWay",
+                    "refreshAfterChange":true
+                }
+            }
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ]
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "controlAggregation": "pages",
+                "controlId": "app",
+                "transition": "slide",
+                "type": "View",
+                "viewType": "XML",
+                "path": "task.107.view",
+                "async": true,
+                "viewPath": "task.107.view"
+            },
+            "routes": [
+                {
+                    "name": "RouteView1",
+                    "pattern": ":?query:",
+                    "target": [
+                        "TargetView1"
+                    ]
+                },
+                {
+                    "name": "RouteView2",
+                    "pattern": "view2",
+                    "target": [
+                        "TargetView2"
+                    ]
+                },
+                {
+                    "name": "RouteView3",
+                    "pattern": "view3",
+                    "target": [
+                        "TargetView3"
+                    ]
+                },
+                {
+                    "name": "RouteView4",
+                    "pattern": "view4",
+                    "target": [
+                        "TargetView4"
+                    ]
+                }
+            ],
+            "targets": {
+                "TargetView1": {
+                    "id": "View1",
+                    "name": "View1"
+                },
+                "TargetView2": {
+                    "id": "View2",
+                    "name": "View2"
+                },
+                "TargetView3": {
+                    "id": "View3",
+                    "name": "View3"
+                },
+                "TargetView4": {
+                    "id": "View4",
+                    "name": "View4"
+                }
+            }
+        },
+        "rootView": {
+            "viewName": "task.107.view.App",
+            "type": "XML",
+            "id": "App"
+        }
+    }
+}
